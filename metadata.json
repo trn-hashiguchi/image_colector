@@ -1,0 +1,7 @@
+{
+  "name": "AI Photo Encyclopedia",
+  "description": "Upload a photo to identify objects, extract them, and create a personalized illustrated encyclopedia using Gemini AI.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
