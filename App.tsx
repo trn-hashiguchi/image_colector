@@ -4,6 +4,7 @@ import { AnnotatedImage } from './components/AnnotatedImage';
 import { ObjectCard } from './components/ObjectCard';
 import { analyzeImage } from './services/geminiService';
 import { AppState } from './types';
+import CameraCapture from './components/CameraCapture';
 
 // Icons
 const BookIcon = () => (
@@ -35,9 +36,9 @@ const App: React.FC = () => {
     result: null,
     error: null,
   });
+  const [showCamera, setShowCamera] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const cameraInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -55,6 +56,16 @@ const App: React.FC = () => {
     }
     // Reset input value to allow re-selection of same file
     event.target.value = '';
+  };
+
+  const handleCapture = (imageSrc: string) => {
+    setState(prev => ({
+      ...prev,
+      selectedImage: imageSrc,
+      result: null,
+      error: null
+    }));
+    setShowCamera(false);
   };
 
   const handleResetImage = () => {
@@ -91,6 +102,13 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen pb-32 bg-stone-50 font-sans text-stone-800">
+      {showCamera && (
+        <CameraCapture 
+          onCapture={handleCapture}
+          onClose={() => setShowCamera(false)}
+        />
+      )}
+
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-40 border-b border-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -146,19 +164,10 @@ const App: React.FC = () => {
                   <div className="grid grid-cols-2 gap-4">
                     {/* Camera Button */}
                     <div 
-                      onClick={() => !state.apiKey ? alert("先にAPIキーを入力してください") : cameraInputRef.current?.click()}
+                      onClick={() => !state.apiKey ? alert("先にAPIキーを入力してください") : setShowCamera(true)}
                       className={`group flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-2xl transition-all cursor-pointer h-40
                         ${!state.apiKey ? 'border-stone-200 bg-stone-50 opacity-60 cursor-not-allowed' : 'border-stone-300 bg-stone-50 hover:bg-teal-50 hover:border-teal-400'}`}
                     >
-                      <input 
-                        type="file" 
-                        ref={cameraInputRef} 
-                        onChange={handleFileChange} 
-                        accept="image/*" 
-                        capture="environment"
-                        className="hidden" 
-                        disabled={!state.apiKey}
-                      />
                       <div className={`p-3 rounded-full mb-3 transition-colors ${!state.apiKey ? 'bg-stone-200 text-stone-400' : 'bg-white text-teal-600 shadow-sm group-hover:scale-110'}`}>
                         <CameraIcon />
                       </div>
