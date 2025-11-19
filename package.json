@@ -1,6 +1,6 @@
 {
   "name": "ai-photo-encyclopedia",
-  "private": true,
+  "homepage": "/ai-photo-encyclopedia/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
