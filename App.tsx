@@ -347,7 +347,11 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      <ApiKeyInput apiKey={state.apiKey} setApiKey={(key) => setState(prev => ({ ...prev, apiKey: key }))} />
+      <ApiKeyInput 
+        apiKey={state.apiKey} 
+        setApiKey={(key) => setState(prev => ({ ...prev, apiKey: key }))} 
+        showCamera={showCamera} 
+      />
     </div>
   );
 };
