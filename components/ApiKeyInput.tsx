@@ -8,7 +8,7 @@ interface ApiKeyInputProps {
 
 export const ApiKeyInput: React.FC<ApiKeyInputProps> = ({ apiKey, setApiKey, showCamera }) => {
   return (
-    <div className={`fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-stone-200 p-4 shadow-lg z-50 transition-all duration-300 ${showCamera ? 'sm:hidden' : ''}`}>
+    <div className={`fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-stone-200 p-4 shadow-lg z-50 transition-all duration-300 ${showCamera ? 'hidden' : ''}`}>
       <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-3">
         <div className="flex items-center gap-2 text-stone-600 whitespace-nowrap">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
